@@ -1,0 +1,3 @@
+---
+name: MyAwesomeService
+startup_command: rails server
