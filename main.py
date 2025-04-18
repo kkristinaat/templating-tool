@@ -36,6 +36,7 @@ class DockerfileRenderer:
 
     @staticmethod
     def to_cmd_list(command_str):
+    # Converts "rails server" into '"rails", "server"' for valid CMD JSON array
         return ', '.join(f'"{arg}"' for arg in shlex.split(command_str))
 
     def render(self, context: dict, output_path="Dockerfile"):

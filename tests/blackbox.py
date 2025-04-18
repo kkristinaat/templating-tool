@@ -52,7 +52,6 @@ CMD ["rails", "server"] # Startup command for MyAwesomeService."""
             f"Expected content doesn't match actual content.\nExpected:\n{expected_content}\n\nActual:\n{dockerfile_content}"
             
     finally:
-        # Clean up
         if default_output.exists():
             default_output.unlink()
         if output_path.exists():
@@ -60,5 +59,4 @@ CMD ["rails", "server"] # Startup command for MyAwesomeService."""
 
 
 if __name__ == "__main__":
-    # This allows running the test directly with python test_blackbox.py
     pytest.main(["-xvs", __file__])
