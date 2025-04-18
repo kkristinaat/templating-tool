@@ -22,33 +22,6 @@ class ConfigLoader:
     def get(self, key, default=None):
         return self.config.get(key, default)
 
-    # def render_dockerfile(self, output_path="Dockerfile"):
-    #     dockerfile_template = """
-    #     FROM ruby:3.0
-    #     LABEL maintainer="John Doe"
-    #     WORKDIR /app
-    #     COPY . /app
-    #     RUN bundle install
-    #     CMD [{{ startup_command | to_cmd_list }}]
-    #     """
-
-    #     # Register a custom filter for converting command strings to JSON arrays
-    #     def to_cmd_list(value):
-    #         import shlex
-    #         return ', '.join(f'"{arg}"' for arg in shlex.split(value))
-
-    #     # Render using Jinja2
-    #     template = Template(dockerfile_template.strip())
-    #     template.environment.filters['to_cmd_list'] = to_cmd_list
-
-    #     rendered = template.render(
-    #         name=self.get("name"),
-    #         startup_command=self.get("startup_command")
-    #     )
-
-    #     # Write to Dockerfile
-    #     Path(output_path).write_text(rendered.strip() + '\n')
-    #     print(f"Dockerfile created at: {output_path}")
 
 class DockerfileRenderer:
     def __init__(self, template_dir="templates", template_file="Dockerfile.j2"):
