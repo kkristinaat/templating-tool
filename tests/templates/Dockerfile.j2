@@ -1,0 +1,6 @@
+FROM ruby:3.0
+LABEL maintainer="{{ maintainer }}"         # John Doe
+WORKDIR /app
+COPY . /app
+RUN bundle install
+CMD [{{ startup_command | to_cmd_list }}] # Startup command for {{ name }}.

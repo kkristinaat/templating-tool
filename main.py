@@ -11,16 +11,21 @@ class ConfigLoader:
 
     def load(self):
         if not self.file_path.exists():
-            raise FileNotFoundError(f"Config file '{self.file_path}' not found.")
+            raise FileNotFoundError(
+                f"Config file '{self.file_path}' not found.")
 
         try:
             with self.file_path.open('r') as file:
                 self.config = yaml.safe_load(file) or {}
+                print(f"Successfully loaded config: {self.config}")
         except yaml.YAMLError as e:
             raise ValueError(f"Failed to parse YAML: {e}")
 
     def get(self, key, default=None):
-        return self.config.get(key, default)
+        value = self.config.get(key, default)
+        print(f"Fetching key '{key}' : {value}")
+        return value
+        # return self.config.get(key, default)
 
 
 class DockerfileRenderer:
@@ -36,7 +41,7 @@ class DockerfileRenderer:
 
     @staticmethod
     def to_cmd_list(command_str):
-    # Converts "rails server" into '"rails", "server"' for valid CMD JSON array
+        # Converts "rails server" into '"rails", "server"' for valid CMD JSON array
         return ', '.join(f'"{arg}"' for arg in shlex.split(command_str))
 
     def render(self, context: dict, output_path="Dockerfile"):
